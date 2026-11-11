@@ -147,6 +147,21 @@ public:
 
   virtual DisplayError GetConfigCount(uint64_t disp_id, uint32_t *count) = 0;
 
+  /**
+   * Get the attributes of a configuration of the given display, indexed like
+   * GetConfigCount(), i.e. counting every mode the display reports, including
+   * the ones that are exposed to the client as a single configuration.
+   *
+   * @param disp_id: The id of the specified display
+   * @param config: The configuration index, from 0 to GetConfigCount() - 1
+   * @param attributes: The attributes of the configuration
+   *
+   * @exception: kErrorNotSupported if disp_id or config is not found
+   */
+  virtual DisplayError GetDisplayAttributesForConfig(
+      uint64_t disp_id, int32_t config,
+      DisplayConfigVariableInfo *attributes) = 0;
+
   virtual DisplayError TryDrawMethod(Display display,
                                      DisplayDrawMethod drawMethod) = 0;
 
